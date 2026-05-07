@@ -1,74 +1,139 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Kamu ❤️</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-pink-100">
-
-    <div class="max-w-6xl mx-auto mt-16 px-6">
-        
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-
-            <div>
-                <h1 class="text-5xl font-bold italic text-pink-500 mb-6">
-                    Hai Sayang ❤️
-                </h1>
-
-                <p class="text-gray-700 leading-7 mb-6 text-justify">
-                    …siapin hati kamu ya 😊
-                    Karena ini bukan cuma sekadar kata-kata, 
-                    tapi sesuatu yang aku siapin khusus buat kamu 😏
-                </p>
-
-                <a href="index2.html"
-                   class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg shadow-md transition">
-                   Buka Pesan 💌
-                </a>
-            </div>
-
-            <div class="mx-auto w-[280px] overflow-hidden rounded-[30px] shadow-xl">
-                <img src="ayang nana.jpeg"
-                     class="w-full h-[250px] object-cover object-top hover:scale-105 transition duration-300">
-            </div>
-
-        </div>
-
-    </div>
-
-    <script>
-setInterval(() => {
-
-    const heart = document.createElement("div");
-
-    heart.innerHTML = "❤️";
-
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "-20px";
-    heart.style.fontSize = "25px";
-    heart.style.zIndex = "9999";
-    heart.style.animation = "fall 5s linear";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
-
-}, 400);
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu ❤️</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
+body {
+    overflow-x: hidden;
+}
+
+/* BACKGROUND NIGHT */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg,
+        #050510 0%,
+        #0b0b22 40%,
+        #1a103d 75%,
+        #2a1b4a 100%
+    );
+}
+
+/* STAR */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.6); }
+}
+
+/* HEART FALL */
 @keyframes fall {
     to {
         transform: translateY(110vh);
         opacity: 0;
     }
 }
+
+/* TEXT TYPE */
+#typing {
+    min-height: 80px;
+}
 </style>
+</head>
+
+<body class="text-white">
+
+<!-- BACKGROUND -->
+<div class="bg-layer">
+
+    <!-- STARS -->
+    <div class="star" style="top:10%; left:20%;"></div>
+    <div class="star" style="top:20%; left:70%;"></div>
+    <div class="star" style="top:40%; left:30%;"></div>
+    <div class="star" style="top:60%; left:80%;"></div>
+    <div class="star" style="top:75%; left:50%;"></div>
+    <div class="star" style="top:30%; left:90%;"></div>
+    <div class="star" style="top:15%; left:60%;"></div>
+
+</div>
+
+<div class="max-w-6xl mx-auto mt-16 px-6 relative z-10">
+
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+
+        <div>
+
+            <h1 class="text-5xl font-bold italic text-pink-400 mb-6">
+                Hai Sayang ❤️
+            </h1>
+
+            <p id="typing" class="text-gray-200 leading-7 mb-6 text-justify"></p>
+
+            <a href="index2.html"
+               class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg shadow-lg transition">
+               Buka Pesan 💌
+            </a>
+
+        </div>
+
+        <div class="mx-auto w-[280px] overflow-hidden rounded-[30px] shadow-2xl">
+            <img src="ayang nana.jpeg"
+                 class="w-full h-[250px] object-cover hover:scale-105 transition duration-300">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- HEART FALL -->
+<script>
+setInterval(() => {
+    const heart = document.createElement("div");
+
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-20px";
+    heart.style.fontSize = "22px";
+    heart.style.zIndex = "9999";
+    heart.style.animation = "fall 5s linear";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+
+}, 350);
+</script>
+
+<!-- TYPE EFFECT -->
+<script>
+const text = "…aku nggak tau kapan kamu baca ini, tapi yang pasti aku mau kamu tau kalau kamu itu spesial banget 😊 bahkan lebih dari yang kamu kira ❤️";
+
+let i = 0;
+
+function typeEffect() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 35);
+    }
+}
+
+typeEffect();
+</script>
 
 </body>
 </html>
