@@ -60,5 +60,37 @@
 
     </div>
 
+    <script>
+setInterval(() => {
+
+    const heart = document.createElement("div");
+
+    heart.innerHTML = "❤️";
+
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-20px";
+    heart.style.fontSize = "25px";
+    heart.style.zIndex = "9999";
+    heart.style.animation = "fall 5s linear";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+
+}, 400);
+</script>
+
+<style>
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+</style>
+
 </body>
 </html>
