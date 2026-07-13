@@ -1,139 +1,1166 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Kamu ❤️</title>
-<script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Safana Sayang ❤️</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #05030f;
+            overflow-x: hidden;
+        }
 
-<style>
-body {
-    overflow-x: hidden;
-}
+        /* Twinkling Stars Background */
+        .stars-container {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
 
-/* BACKGROUND NIGHT */
-.bg-layer {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(180deg,
-        #050510 0%,
-        #0b0b22 40%,
-        #1a103d 75%,
-        #2a1b4a 100%
-    );
-}
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: rgba(13, 10, 36, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        .glass-card-hover:hover {
+            border-color: rgba(244, 63, 94, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(244, 63, 94, 0.15);
+            transform: translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-/* STAR */
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle 2s infinite alternate;
-}
+        /* Text Glowing */
+        .text-glow-pink {
+            text-shadow: 0 0 10px rgba(244, 63, 94, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
+        }
+        
+        .text-glow-purple {
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.4), 0 0 20px rgba(139, 92, 246, 0.2);
+        }
 
-@keyframes twinkle {
-    from { opacity: 0.2; transform: scale(1); }
-    to { opacity: 1; transform: scale(1.6); }
-}
+        /* Falling animations */
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-/* HEART FALL */
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-}
+        /* Flower Burst Particles */
+        .flower-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            font-size: 24px;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        
+        @keyframes burst {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
 
-/* TEXT TYPE */
-#typing {
-    min-height: 80px;
-}
-</style>
+        /* Gift Box CSS Animation */
+        .gift-lid {
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gift-box-wrapper:hover .gift-lid {
+            transform: translateY(-8px) rotate(-3deg);
+        }
+        .gift-box-opened .gift-lid {
+            transform: translateY(-150px) rotate(-20deg) scale(0);
+            opacity: 0;
+        }
+        .gift-box-opened .gift-body {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.8s ease-in-out;
+        }
+
+        /* 3D Flip Cards (Things I Love About You) */
+        .flip-card {
+            perspective: 1000px;
+            height: 180px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card.is-flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        
+        .flip-card-front {
+            background: rgba(15, 12, 42, 0.5);
+            border: 1px dashed rgba(244, 63, 94, 0.3);
+            color: white;
+            box-shadow: inset 0 0 15px rgba(244, 63, 94, 0.05);
+        }
+        
+        .flip-card-back {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.6) 0%, rgba(244, 63, 94, 0.4) 100%);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: white;
+            transform: rotateY(180deg);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
+        }
+
+        /* CRT Glitch Retro Effect */
+        .crt-screen {
+            position: relative;
+            background: #09090f;
+            overflow: hidden;
+            border: 6px solid #272530;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(244, 63, 94, 0.15), inset 0 0 50px rgba(0, 0, 0, 0.9);
+        }
+        
+        .crt-screen::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            z-index: 20;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+            animation: crt-flicker 0.15s infinite;
+        }
+        
+        .scanline {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(244, 63, 94, 0.05) 50%, rgba(255, 255, 255, 0));
+            position: absolute;
+            z-index: 10;
+            animation: scan 4s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+        
+        @keyframes crt-flicker {
+            0% { opacity: 0.98; }
+            50% { opacity: 1; }
+            100% { opacity: 0.99; }
+        }
+        
+        .blink {
+            animation: blinker 1s step-start infinite;
+        }
+        
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        /* Typing Effect Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blinker 0.8s step-start infinite;
+        }
+    </style>
 </head>
 
-<body class="text-white">
+<body class="text-white selection:bg-pink-500 selection:text-white">
 
-<!-- BACKGROUND -->
-<div class="bg-layer">
+    <!-- 🎵 BACKGROUND MUSIC -->
+    <audio id="bgMusic" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-delicate-piano-romantic-instrumental-79.mp3" type="audio/mpeg">
+        <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes/Music_For_The_Road/Scott_Holmes_-_05_-_Happy_Whistling_Ukulele.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- STARS -->
-    <div class="star" style="top:10%; left:20%;"></div>
-    <div class="star" style="top:20%; left:70%;"></div>
-    <div class="star" style="top:40%; left:30%;"></div>
-    <div class="star" style="top:60%; left:80%;"></div>
-    <div class="star" style="top:75%; left:50%;"></div>
-    <div class="star" style="top:30%; left:90%;"></div>
-    <div class="star" style="top:15%; left:60%;"></div>
+    <!-- STARS BACKGROUND -->
+    <div class="stars-container" id="stars-container"></div>
 
-</div>
-
-<div class="max-w-6xl mx-auto mt-16 px-6 relative z-10">
-
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-
-        <div>
-
-            <h1 class="text-5xl font-bold italic text-pink-400 mb-6">
-                Hai Sayang ❤️
-            </h1>
-
-            <p id="typing" class="text-gray-200 leading-7 mb-6 text-justify"></p>
-
-            <a href="index2.html"
-               class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg shadow-lg transition">
-               Buka Pesan 💌
-            </a>
-
+    <!-- 🎁 INTRO SPLASH SCREEN -->
+    <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col justify-center items-center bg-[#05030f] px-6 text-center cursor-pointer select-none">
+        
+        <!-- Glowing Ambient Lights -->
+        <div class="absolute w-[300px] h-[300px] rounded-full bg-pink-500/10 blur-[100px] -z-10"></div>
+        
+        <div class="gift-box-wrapper flex flex-col items-center">
+            
+            <!-- Gift Box SVG Container -->
+            <div id="gift-box" class="relative w-44 h-44 mb-10 transition duration-500 transform hover:scale-105 active:scale-95">
+                <!-- Lid -->
+                <svg class="gift-lid absolute top-0 left-0 w-full h-1/3 z-20 drop-shadow-[0_4px_10px_rgba(244,63,94,0.3)]" viewBox="0 0 100 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="96" height="25" rx="3" fill="#f43f5e" stroke="#fda4af" stroke-width="2"/>
+                    <rect x="42" y="0" width="16" height="30" fill="#e11d48"/>
+                    <!-- Ribbon Bow Left -->
+                    <path d="M42 5C32 -5 22 5 42 12" fill="none" stroke="#fda4af" stroke-width="4" stroke-linecap="round"/>
+                    <!-- Ribbon Bow Right -->
+                    <path d="M58 5C68 -5 78 5 58 12" fill="none" stroke="#fda4af" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                
+                <!-- Body -->
+                <svg class="gift-body absolute bottom-0 left-4 w-9/12 h-2/3 z-10 drop-shadow-[0_8px_20px_rgba(244,63,94,0.2)]" viewBox="0 0 80 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="76" height="61" rx="4" fill="#be123c" stroke="#f43f5e" stroke-width="2"/>
+                    <rect x="32" y="0" width="16" height="63" fill="#e11d48"/>
+                </svg>
+            </div>
+            
+            <h2 class="text-xs uppercase tracking-[0.25em] font-extrabold text-pink-400 mb-2">A Little Birthday Surprise</h2>
+            <h1 class="text-3xl md:text-4xl font-playfair italic font-bold mb-8 text-glow-pink">Untuk Ayang Nana ❤️</h1>
+            
+            <div class="px-6 py-2.5 rounded-full border border-pink-500/20 bg-pink-500/5 text-xs text-pink-300/70 tracking-widest uppercase animate-pulse">
+                TAP ANYWHERE TO OPEN
+            </div>
+            
         </div>
-
-        <div class="mx-auto w-[280px] overflow-hidden rounded-[30px] shadow-2xl">
-            <img src="ayang nana.jpeg"
-                 class="w-full h-[250px] object-cover hover:scale-105 transition duration-300">
-        </div>
-
     </div>
 
-</div>
 
-<!-- HEART FALL -->
-<script>
-setInterval(() => {
-    const heart = document.createElement("div");
+    <!-- 📱 FLOATING SPOTIFY PLAYER WIDGET -->
+    <div id="spotify-player" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-40 glass-card p-3 rounded-2xl flex items-center gap-3 w-[260px] md:w-[280px] shadow-2xl transform translate-y-24 opacity-0 transition-all duration-700 pointer-events-none">
+        
+        <!-- Album Art -->
+        <div class="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-pink-500/30">
+            <img src="ayang nana.jpeg" alt="Safana" id="player-art" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Track Details -->
+        <div class="flex-grow min-w-0">
+            <h4 class="text-sm font-semibold truncate pr-2 text-pink-100">Canon in D</h4>
+            <p class="text-[10px] text-pink-300/70 truncate">Acoustic Piano & Violin</p>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-pink-950/40 h-1 rounded-full mt-1.5 overflow-hidden">
+                <div id="music-progress" class="bg-pink-500 h-full w-0 transition-all duration-100"></div>
+            </div>
+            
+            <div class="flex justify-between items-center mt-1">
+                <span id="music-time" class="text-[8px] text-pink-300/50">0:00 / 0:00</span>
+                <span class="text-[8px] uppercase tracking-wider text-pink-400 font-bold">Spotify Surprises</span>
+            </div>
+        </div>
+        
+        <!-- Play / Pause Controls -->
+        <button id="player-btn" class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center text-white hover:bg-pink-600 transition flex-shrink-0">
+            <!-- Play icon -->
+            <svg id="play-icon" class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <!-- Pause icon (hidden by default) -->
+            <svg id="pause-icon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+    </div>
 
-    heart.innerHTML = "❤️";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "-20px";
-    heart.style.fontSize = "22px";
-    heart.style.zIndex = "9999";
-    heart.style.animation = "fall 5s linear";
 
-    document.body.appendChild(heart);
+    <!-- 🚀 MAIN CONTENT CONTAINER -->
+    <main id="main-content" class="relative z-10 max-w-5xl mx-auto px-6 py-20 opacity-0 pointer-events-none transition-all duration-1000 blur-sm">
 
-    setTimeout(() => heart.remove(), 5000);
+        <!-- ================= SECTION 1: HERO / COVER ================= -->
+        <section class="min-h-[85vh] flex flex-col justify-center items-center text-center relative mb-20">
+            
+            <!-- Floating Planet Background Decors -->
+            <div class="absolute top-10 left-5 w-16 h-16 rounded-full bg-purple-600/10 blur-xl animate-bounce" style="animation-duration: 6s;"></div>
+            <div class="absolute bottom-20 right-5 w-24 h-24 rounded-full bg-pink-600/10 blur-2xl animate-pulse" style="animation-duration: 8s;"></div>
 
-}, 350);
-</script>
+            <span class="px-4 py-1.5 rounded-full border border-pink-500/20 bg-pink-500/5 text-xs text-pink-400 uppercase tracking-[0.2em] font-semibold mb-6">
+                #happy birthday, nana 🎉
+            </span>
+            
+            <h1 class="text-4xl md:text-7xl font-bold font-playfair mb-6 tracking-tight">
+                To The Prettiest Girl, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 text-glow-pink italic">
+                    Safana Nurlies Maharani
+                </span>
+            </h1>
+            
+            <p class="text-sm md:text-base max-w-xl text-gray-300 font-light leading-relaxed mb-12">
+                I hope today brings you as much joy as you give to everyone around you. You deserve all the stars in the universe. ✨
+            </p>
+            
+            <!-- Pulse Circle Scroll Down Button -->
+            <button onclick="scrollToSection('countdown-section')" class="flex flex-col items-center gap-2 group transition">
+                <div class="w-12 h-12 rounded-full border border-pink-500/30 flex items-center justify-center bg-pink-500/5 group-hover:border-pink-500/60 group-hover:bg-pink-500/10 transition duration-300 shadow-[0_0_15px_rgba(244,63,94,0.1)]">
+                    <svg class="w-5 h-5 text-pink-400 animate-bounce mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </div>
+                <span class="text-[10px] tracking-widest text-pink-300/60 uppercase group-hover:text-pink-300 transition">Scroll to Explore</span>
+            </button>
+        </section>
 
-<!-- TYPE EFFECT -->
-<script>
-const text = "…aku nggak tau kapan kamu baca ini, tapi yang pasti aku mau kamu tau kalau kamu itu spesial banget 😊 bahkan lebih dari yang kamu kira ❤️";
 
-let i = 0;
+        <!-- ================= SECTION 2: COUNTDOWN TIMER ================= -->
+        <section id="countdown-section" class="py-16 mb-24 scroll-mt-24">
+            
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <!-- Hourglass Icon -->
+                <svg class="w-5 h-5 text-pink-400 animate-spin" style="animation-duration: 4s;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3h14M5 21h14M19 3v4.618a3 3 0 01-.447 1.582L14.418 12l4.135 4.8a3 3 0 01.447 1.582V21M5 3v4.618a3 3 0 00.447 1.582L9.582 12l-4.135 4.8A3 3 0 005 18.382V21"/>
+                </svg>
+                <h3 class="text-xs uppercase tracking-[0.2em] font-extrabold text-pink-400">Time your existence</h3>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-semibold text-center mb-12">On This Earth</h2>
+            
+            <!-- Age Ticker Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-6 max-w-4xl mx-auto">
+                <!-- Years -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span id="years" class="text-4xl md:text-5xl font-bold text-glow-pink text-pink-100 font-mono">19</span>
+                    <span class="text-[10px] tracking-widest text-pink-400/70 font-semibold uppercase mt-2">Years</span>
+                </div>
+                <!-- Months -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span id="months" class="text-4xl md:text-5xl font-bold text-glow-purple text-pink-100 font-mono">00</span>
+                    <span class="text-[10px] tracking-widest text-pink-400/70 font-semibold uppercase mt-2">Months</span>
+                </div>
+                <!-- Days -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span id="days" class="text-4xl md:text-5xl font-bold text-glow-purple text-pink-100 font-mono">00</span>
+                    <span class="text-[10px] tracking-widest text-pink-400/70 font-semibold uppercase mt-2">Days</span>
+                </div>
+                <!-- Hours -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span id="hours" class="text-4xl md:text-5xl font-bold text-glow-pink text-pink-100 font-mono">05</span>
+                    <span class="text-[10px] tracking-widest text-pink-400/70 font-semibold uppercase mt-2">Hours</span>
+                </div>
+                <!-- Minutes -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span id="minutes" class="text-4xl md:text-5xl font-bold text-glow-purple text-pink-100 font-mono">27</span>
+                    <span class="text-[10px] tracking-widest text-pink-400/70 font-semibold uppercase mt-2">Minutes</span>
+                </div>
+                <!-- Seconds -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-center items-center shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span id="seconds" class="text-4xl md:text-5xl font-bold text-glow-purple text-pink-100 font-mono">50</span>
+                    <span class="text-[10px] tracking-widest text-pink-400/70 font-semibold uppercase mt-2">Seconds</span>
+                </div>
+            </div>
+            
+            <p class="text-center text-[10px] text-pink-300/40 tracking-widest uppercase mt-6">
+                live counting your precious lifetime
+            </p>
+        </section>
 
-function typeEffect() {
-    if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 35);
-    }
-}
 
-typeEffect();
-</script>
+        <!-- ================= SECTION 3: WISHES CARD ================= -->
+        <section class="py-12 mb-24 max-w-4xl mx-auto">
+            <span class="text-[10px] uppercase tracking-widest text-pink-400/60 block text-center mb-3">+ + + a special day</span>
+            <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden shadow-2xl border border-pink-500/20 text-center">
+                
+                <!-- Background ambient design elements -->
+                <div class="absolute -top-12 -left-12 w-32 h-32 rounded-full bg-pink-500/10 blur-xl"></div>
+                <div class="absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-purple-500/10 blur-xl"></div>
+                
+                <h3 class="text-2xl md:text-3xl font-playfair font-bold italic mb-6 text-pink-100">
+                    Wishing You The Happiest Of Birthdays.
+                </h3>
+                
+                <p class="text-sm md:text-base text-gray-300 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Another year older, and somehow you keep getting better. I wanted to make something a little different for your birthday this year. Consider this a small reminder of how much you mean to me, and to everyone lucky enough to have you in their lives.
+                </p>
+                
+                <div class="flex flex-col items-center">
+                    <span class="w-10 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 mb-3"></span>
+                    <span class="text-sm font-semibold font-playfair italic text-pink-400">- Robil ❤️</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 4: THINGS I LOVE ================= -->
+        <section class="py-12 mb-24">
+            <h2 class="text-3xl md:text-4xl font-semibold text-center mb-2">Things I Love About You</h2>
+            <p id="cards-progress" class="text-xs text-pink-400/70 text-center uppercase tracking-widest mb-10">
+                0 of 6 revealed - tap a card to unlock
+            </p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- Card 1 -->
+                <div class="flip-card" id="love-card-1" onclick="flipCard('love-card-1')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <!-- Lock Icon -->
+                            <span class="text-2xl mb-2 text-pink-400">⚡</span>
+                            <span class="text-xs uppercase tracking-widest text-pink-300/70 font-semibold mb-1">Your Energy</span>
+                            <span class="text-[9px] uppercase text-pink-500/40 tracking-wider">Tap to reveal</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="text-2xl mb-2 text-white">⚡</span>
+                            <h4 class="font-bold text-sm tracking-wide mb-2 uppercase text-pink-100">Your Energy</h4>
+                            <p class="text-xs text-pink-200/90 leading-relaxed font-light px-2">
+                                The way you instantly light up any room you walk into. Your vibes are always so warm and comforting.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="flip-card" id="love-card-2" onclick="flipCard('love-card-2')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="text-2xl mb-2 text-pink-400">😂</span>
+                            <span class="text-xs uppercase tracking-widest text-pink-300/70 font-semibold mb-1">Your Humor</span>
+                            <span class="text-[9px] uppercase text-pink-500/40 tracking-wider">Tap to reveal</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="text-2xl mb-2 text-white">😂</span>
+                            <h4 class="font-bold text-sm tracking-wide mb-2 uppercase text-pink-100">Your Humor</h4>
+                            <p class="text-xs text-pink-200/90 leading-relaxed font-light px-2">
+                                You always know how to make me laugh, even on my worst days. Random conversations with you are always the best!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="flip-card" id="love-card-3" onclick="flipCard('love-card-3')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="text-2xl mb-2 text-pink-400">🎯</span>
+                            <span class="text-xs uppercase tracking-widest text-pink-300/70 font-semibold mb-1">Your Drive</span>
+                            <span class="text-[9px] uppercase text-pink-500/40 tracking-wider">Tap to reveal</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="text-2xl mb-2 text-white">🎯</span>
+                            <h4 class="font-bold text-sm tracking-wide mb-2 uppercase text-pink-100">Your Drive</h4>
+                            <p class="text-xs text-pink-200/90 leading-relaxed font-light px-2">
+                                Seeing you work hard for your goals is genuinely inspiring. You never give up and it makes me super proud of you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="flip-card" id="love-card-4" onclick="flipCard('love-card-4')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="text-2xl mb-2 text-pink-400">💖</span>
+                            <span class="text-xs uppercase tracking-widest text-pink-300/70 font-semibold mb-1">Your Heart</span>
+                            <span class="text-[9px] uppercase text-pink-500/40 tracking-wider">Tap to reveal</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="text-2xl mb-2 text-white">💖</span>
+                            <h4 class="font-bold text-sm tracking-wide mb-2 uppercase text-pink-100">Your Heart</h4>
+                            <p class="text-xs text-pink-200/90 leading-relaxed font-light px-2">
+                                You care deeply about your friends, and your kindness is a breath of fresh air. Your soul is beautiful.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="flip-card" id="love-card-5" onclick="flipCard('love-card-5')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="text-2xl mb-2 text-pink-400">✨</span>
+                            <span class="text-xs uppercase tracking-widest text-pink-300/70 font-semibold mb-1">Your Style</span>
+                            <span class="text-[9px] uppercase text-pink-500/40 tracking-wider">Tap to reveal</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="text-2xl mb-2 text-white">✨</span>
+                            <h4 class="font-bold text-sm tracking-wide mb-2 uppercase text-pink-100">Your Style</h4>
+                            <p class="text-xs text-pink-200/90 leading-relaxed font-light px-2">
+                                Effortlessly cool, no matter what you wear. You carry yourself with such grace and charm!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="flip-card" id="love-card-6" onclick="flipCard('love-card-6')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="text-2xl mb-2 text-pink-400">🤝</span>
+                            <span class="text-xs uppercase tracking-widest text-pink-300/70 font-semibold mb-1">Your Friendship</span>
+                            <span class="text-[9px] uppercase text-pink-500/40 tracking-wider">Tap to reveal</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="text-2xl mb-2 text-white">🤝</span>
+                            <h4 class="font-bold text-sm tracking-wide mb-2 uppercase text-pink-100">Your Friendship</h4>
+                            <p class="text-xs text-pink-200/90 leading-relaxed font-light px-2">
+                                Just knowing I can count on you means everything. You are my constant and my favorite safe haven.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-8">
+                <button onclick="revealAllCards()" class="px-6 py-2.5 rounded-full border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500 hover:text-white transition duration-300 text-xs text-pink-300 tracking-wider uppercase font-semibold">
+                    Reveal All At Once
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 5: SEASONS ================= -->
+        <section class="py-12 mb-24 max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-semibold text-center mb-2">A Year Of Great Moments</h2>
+            <p class="text-xs text-pink-400/70 text-center uppercase tracking-widest mb-10">
+                tap each season to discover its meaning
+            </p>
+            
+            <div class="glass-card p-6 md:p-8 rounded-3xl border border-pink-500/20 shadow-xl">
+                <!-- Tab Buttons -->
+                <div class="grid grid-cols-4 gap-2 mb-8">
+                    <button onclick="switchSeason('spring')" id="btn-spring" class="season-btn py-2.5 rounded-xl border border-pink-500/35 bg-pink-500/15 text-pink-200 font-semibold text-xs tracking-wider uppercase flex flex-col md:flex-row items-center justify-center gap-1.5 transition">
+                        <span>🌸</span> <span>Spring</span>
+                    </button>
+                    <button onclick="switchSeason('summer')" id="btn-summer" class="season-btn py-2.5 rounded-xl border border-pink-500/10 bg-transparent text-pink-300/60 font-semibold text-xs tracking-wider uppercase flex flex-col md:flex-row items-center justify-center gap-1.5 transition">
+                        <span>☀️</span> <span>Summer</span>
+                    </button>
+                    <button onclick="switchSeason('autumn')" id="btn-autumn" class="season-btn py-2.5 rounded-xl border border-pink-500/10 bg-transparent text-pink-300/60 font-semibold text-xs tracking-wider uppercase flex flex-col md:flex-row items-center justify-center gap-1.5 transition">
+                        <span>🍁</span> <span>Autumn</span>
+                    </button>
+                    <button onclick="switchSeason('winter')" id="btn-winter" class="season-btn py-2.5 rounded-xl border border-pink-500/10 bg-transparent text-pink-300/60 font-semibold text-xs tracking-wider uppercase flex flex-col md:flex-row items-center justify-center gap-1.5 transition">
+                        <span>❄️</span> <span>Winter</span>
+                    </button>
+                </div>
+                
+                <!-- Season Content Description -->
+                <div class="min-h-[140px] flex items-center justify-center text-center px-4">
+                    <p id="season-desc" class="text-sm md:text-base text-gray-300 leading-relaxed font-light max-w-xl transition-all duration-300 transform scale-100">
+                        A new chapter begins today :) I hope this year brings you fresh opportunities, beautiful surprises, and the absolute happiness you deserve.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 6: PHOTO GALLERY ================= -->
+        <section class="py-12 mb-24">
+            <h2 class="text-3xl md:text-4xl font-semibold text-center mb-2">Some Of Our Best Times</h2>
+            <p class="text-xs text-pink-400/70 text-center uppercase tracking-widest mb-10">
+                A polaroid grid of memories
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+                <!-- Photo 1 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:rotate-1 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="ayang nana.jpeg" alt="Memories 1" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 2 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:-rotate-1 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto1.jpeg" alt="Memories 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 3 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:rotate-2 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto2.jpeg" alt="Memories 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 4 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:-rotate-2 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto3.jpeg" alt="Memories 4" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 5 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:rotate-1 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto4.jpeg" alt="Memories 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 6 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:-rotate-1 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto5.jpeg" alt="Memories 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 7 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:rotate-2 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto6.jpeg" alt="Memories 7" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+                <!-- Photo 8 -->
+                <div class="glass-card p-3 rounded-2xl group cursor-pointer hover:-rotate-2 transition-all duration-300">
+                    <div class="w-full h-44 md:h-48 rounded-xl overflow-hidden border border-pink-500/10">
+                        <img src="foto7.jpeg" alt="Memories 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 7: WISHES BUTTON ================= -->
+        <section class="py-12 text-center max-w-xl mx-auto">
+            <div class="flex justify-center gap-1 mb-3 text-pink-400">
+                <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+            </div>
+            
+            <h3 class="text-2xl font-semibold mb-6">Have The Best Day Ever</h3>
+            <p class="text-xs text-gray-400 leading-relaxed font-light mb-8 px-6">
+                Take a second today to just breathe and enjoy it. Eat too much cake, make a wish, and have a great time celebrating. You deserve a perfect birthday.
+            </p>
+            
+            <button id="celebrate-btn" onclick="celebrateEffect()" class="relative group px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 font-semibold tracking-wider text-xs uppercase shadow-xl transition-all duration-300 hover:shadow-pink-500/25 select-none overflow-hidden">
+                <span class="relative z-10 flex items-center justify-center gap-2">
+                    <span>Click to Celebrate!</span> <span class="animate-pulse">💖</span>
+                </span>
+                <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+            </button>
+        </section>
+
+
+        <!-- ================= SECTION 8: SECRET ACCESS ================= -->
+        <section class="pt-16 pb-8 text-center">
+            <button onclick="openSecretModal()" class="text-[10px] tracking-[0.25em] text-pink-300/40 hover:text-pink-400 transition-all uppercase duration-300 cursor-pointer py-2 px-4 rounded border border-transparent hover:border-pink-500/10 hover:bg-pink-500/5 animate-pulse">
+                🗝️ A Secret Just For You
+            </button>
+            
+            <p class="text-[9px] text-pink-300/20 tracking-wider mt-12 uppercase">
+                @by: Robil Muhammad Darwis • ❤️ Safana
+            </p>
+        </section>
+
+    </main>
+
+
+    <!-- 📺 RETRO CRT GLITCH SECRET MODAL -->
+    <div id="secret-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 hidden transition-opacity duration-300 opacity-0">
+        
+        <div class="w-full max-w-lg crt-screen p-6 relative">
+            <!-- Scanline scan effect -->
+            <div class="scanline"></div>
+            
+            <!-- Blinking REC Indicator -->
+            <div class="absolute top-4 left-6 z-30 flex items-center gap-1.5 text-red-500 font-mono text-xs tracking-wider">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-600 blink"></div>
+                <span>REC</span>
+            </div>
+            
+            <!-- PLAY indicators -->
+            <div class="absolute top-4 right-6 z-30 flex flex-col items-end text-[10px] text-green-400/80 font-mono">
+                <span>PLAY</span>
+                <span>SP</span>
+            </div>
+            
+            <!-- Video Container / Camera content -->
+            <div class="flex flex-col items-center py-6 mt-4 relative z-10 select-none">
+                
+                <div class="w-48 h-48 rounded-full overflow-hidden border-2 border-green-500/30 bg-black/50 p-1 mb-6 relative">
+                    <!-- Static Glitch Line Overlay -->
+                    <div class="absolute inset-0 bg-transparent pointer-events-none border border-green-500/10" style="background-image: linear-gradient(transparent 50%, rgba(34, 197, 94, 0.05) 50%); background-size: 100% 4px;"></div>
+                    <img src="ayang nana.jpeg" alt="Retro Nana" class="w-full h-full object-cover object-top grayscale sepia opacity-85 contrast-125">
+                </div>
+                
+                <div class="text-center font-mono text-green-400 tracking-wider">
+                    <p class="text-[10px] text-green-500/60 uppercase mb-2">&gt;&gt; video_calibration_ok</p>
+                    <h3 class="text-base font-bold uppercase mb-3 text-glow-green">Here Is To Many More Birthdays Together</h3>
+                    <p class="text-xs text-green-300/80 max-w-xs mx-auto leading-relaxed">
+                        "Terima kasih sudah menjadi bagian terindah dalam hidupku. Selamat ulang tahun, Safana."
+                    </p>
+                </div>
+                
+            </div>
+            
+            <!-- Date stamp overlay -->
+            <div class="absolute bottom-4 left-6 z-30 text-[10px] text-green-400/80 font-mono">
+                <span>04:57 PM</span><br>
+                <span>JUL. 13 2005</span>
+            </div>
+            
+            <!-- Close button -->
+            <button onclick="closeSecretModal()" class="absolute bottom-4 right-6 z-30 border border-green-500/30 hover:border-green-500 hover:bg-green-950/20 px-3 py-1 rounded text-[10px] font-mono text-green-400 uppercase tracking-widest transition duration-300">
+                Close X
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // --- 1. BIRTHDATE CONFIGURATION ---
+        // Setup Safana's birthdate (July 13th, 2005 at 00:00:00)
+        // If current date is July 13th, 2026, she will be exactly 21 years old.
+        const birthDate = new Date("2005-07-13T00:00:00");
+        
+        // --- 2. MUSIC CONTROL & SPLASH UNLOCK ---
+        const bgMusic = document.getElementById('bgMusic');
+        const splashScreen = document.getElementById('splash-screen');
+        const mainContent = document.getElementById('main-content');
+        const spotifyPlayer = document.getElementById('spotify-player');
+        
+        // Initial setup to lock scrolling
+        document.body.style.overflow = "hidden";
+
+        // Listen for tap on splash screen
+        splashScreen.addEventListener('click', () => {
+            // Check if already opened to avoid double triggers
+            if (splashScreen.classList.contains('gift-box-opened')) return;
+            
+            splashScreen.classList.add('gift-box-opened');
+            
+            // Try to start playing music immediately
+            bgMusic.volume = 0.55;
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    updatePlayerState(true);
+                }).catch(error => {
+                    console.log("Autoplay blocked by browser. User gesture captured, setting default visual state.");
+                    updatePlayerState(false);
+                });
+            }
+
+            // Trigger flower explosion particles
+            triggerFlowerBurst();
+            
+            // Transition out splash screen
+            setTimeout(() => {
+                splashScreen.classList.add('opacity-0', 'transition-all', 'duration-1000');
+                
+                // Transition in main content and spotify widget
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    document.body.style.overflowY = "auto";
+                    
+                    // Reveal Main Page
+                    mainContent.classList.remove('opacity-0', 'pointer-events-none', 'blur-sm');
+                    mainContent.classList.add('opacity-100');
+                    
+                    // Reveal Spotify floating widget
+                    spotifyPlayer.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+                    spotifyPlayer.classList.add('translate-y-0', 'opacity-100');
+                    
+                }, 1000);
+            }, 1200);
+        });
+
+        // --- 3. FLOWER BURST PARTICLE EMITTER ---
+        function triggerFlowerBurst() {
+            const giftBox = document.getElementById('gift-box');
+            const rect = giftBox.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const flowers = ["🌻", "🌹", "🌸", "🌼", "🌺", "🌷", "💖", "✨"];
+            const particleCount = 75;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower-particle';
+                flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.left = centerX + 'px';
+                flower.style.top = centerY + 'px';
+                
+                // Random angle (0 to 360) and radius expansion
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 260 + 80;
+                const duration = Math.random() * 800 + 1000;
+                
+                flower.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                flower.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                flower.style.setProperty('--rot', Math.random() * 720 - 360 + 'deg');
+                flower.style.animation = `burst ${duration}ms cubic-bezier(0.1, 0.8, 0.3, 1) forwards`;
+                
+                document.body.appendChild(flower);
+                
+                // Auto clean-up
+                setTimeout(() => flower.remove(), duration);
+            }
+        }
+
+        // --- 4. TWINKLING STARS IN BACKGROUND ---
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            const starCount = window.innerWidth < 768 ? 40 : 80; // Scale density based on device
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                
+                // Distribute size, speed and delays randomly
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.animationDuration = Math.random() * 3 + 2 + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // --- 5. SPOTIFY WIDGET CONTROL LOGIC ---
+        const playerBtn = document.getElementById('player-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const musicProgress = document.getElementById('music-progress');
+        const musicTime = document.getElementById('music-time');
+        const playerArt = document.getElementById('player-art');
+
+        playerBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                updatePlayerState(true);
+            } else {
+                bgMusic.pause();
+                updatePlayerState(false);
+            }
+        });
+
+        function updatePlayerState(isPlaying) {
+            if (isPlaying) {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                playerArt.classList.add('animate-spin');
+                playerArt.style.animationDuration = '12s';
+            } else {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                playerArt.classList.remove('animate-spin');
+            }
+        }
+
+        // Audio progress update
+        bgMusic.addEventListener('timeupdate', () => {
+            if (bgMusic.duration) {
+                const pct = (bgMusic.currentTime / bgMusic.duration) * 100;
+                musicProgress.style.width = pct + '%';
+                
+                // Format timer display
+                const format = (time) => {
+                    const m = Math.floor(time / 60);
+                    const s = Math.floor(time % 60).toString().padStart(2, '0');
+                    return `${m}:${s}`;
+                };
+                musicTime.innerText = `${format(bgMusic.currentTime)} / ${format(bgMusic.duration)}`;
+            }
+        });
+
+        // --- 6. AGE COUNTDOWN TICKER LOGIC ---
+        function updateAgeCountdown() {
+            const now = new Date();
+            
+            let years = now.getFullYear() - birthDate.getFullYear();
+            let months = now.getMonth() - birthDate.getMonth();
+            let days = now.getDate() - birthDate.getDate();
+            let hours = now.getHours() - birthDate.getHours();
+            let minutes = now.getMinutes() - birthDate.getMinutes();
+            let seconds = now.getSeconds() - birthDate.getSeconds();
+            
+            // Adjust calculation based on standard date math rules
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+            if (days < 0) {
+                // Get days in the previous month
+                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += prevMonth.getDate();
+                months--;
+            }
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+            
+            // Format numbers to always display 2 digits
+            const pad = (num) => num.toString().padStart(2, '0');
+            
+            document.getElementById('years').innerText = pad(years);
+            document.getElementById('months').innerText = pad(months);
+            document.getElementById('days').innerText = pad(days);
+            document.getElementById('hours').innerText = pad(hours);
+            document.getElementById('minutes').innerText = pad(minutes);
+            document.getElementById('seconds').innerText = pad(seconds);
+        }
+        
+        // Tick timer every second
+        setInterval(updateAgeCountdown, 1000);
+        updateAgeCountdown(); // Run immediately
+
+        // Helper scroll function
+        function scrollToSection(id) {
+            const target = document.getElementById(id);
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- 7. THINGS I LOVE CARDS LOGIC ---
+        const flippedCardsSet = new Set();
+        const totalCardsCount = 6;
+
+        function flipCard(id) {
+            const card = document.getElementById(id);
+            card.classList.toggle('is-flipped');
+            
+            if (card.classList.contains('is-flipped')) {
+                flippedCardsSet.add(id);
+                // Trigger localized heart burst
+                triggerCardSparkle(card);
+            } else {
+                flippedCardsSet.delete(id);
+            }
+            
+            updateProgressTracker();
+        }
+
+        function revealAllCards() {
+            for (let i = 1; i <= totalCardsCount; i++) {
+                const id = `love-card-${i}`;
+                const card = document.getElementById(id);
+                if (!card.classList.contains('is-flipped')) {
+                    card.classList.add('is-flipped');
+                    flippedCardsSet.add(id);
+                    triggerCardSparkle(card);
+                }
+            }
+            updateProgressTracker();
+            
+            // Fire full screen celebration when all unlocked at once
+            setTimeout(celebrateEffect, 400);
+        }
+
+        function updateProgressTracker() {
+            const progressEl = document.getElementById('cards-progress');
+            const count = flippedCardsSet.size;
+            
+            if (count === totalCardsCount) {
+                progressEl.innerHTML = "🎉 All reasons revealed! Love you! ❤️";
+                progressEl.classList.add('text-glow-pink', 'font-bold');
+            } else {
+                progressEl.innerHTML = `${count} of ${totalCardsCount} revealed - tap a card to unlock`;
+                progressEl.classList.remove('text-glow-pink', 'font-bold');
+            }
+        }
+
+        function triggerCardSparkle(card) {
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const sparks = ["✨", "💖", "💕", "❤️"];
+            
+            for (let i = 0; i < 8; i++) {
+                const sp = document.createElement('div');
+                sp.innerText = sparks[Math.floor(Math.random() * sparks.length)];
+                sp.style.position = 'fixed';
+                sp.style.left = centerX + 'px';
+                sp.style.top = centerY + 'px';
+                sp.style.fontSize = Math.random() * 10 + 12 + 'px';
+                sp.style.pointerEvents = 'none';
+                sp.style.zIndex = '99';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 70 + 30;
+                const duration = Math.random() * 500 + 400;
+                
+                sp.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                sp.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                sp.style.setProperty('--rot', Math.random() * 360 + 'deg');
+                sp.style.animation = `burst ${duration}ms ease-out forwards`;
+                
+                document.body.appendChild(sp);
+                setTimeout(() => sp.remove(), duration);
+            }
+        }
+
+        // --- 8. SEASON SWITCH TABS LOGIC ---
+        const seasonData = {
+            spring: "A new chapter begins today :) I hope this year brings you fresh opportunities, beautiful surprises, and the absolute happiness you deserve.",
+            summer: "Here is to more road trips, random adventures, long walks under the stars, and memories we will cherish forever.",
+            autumn: "Growing older, growing wiser, but always remaining the kind, loving, and beautiful person you are.",
+            winter: "Warmth in the coldest days, comfort in the hardest times. No matter how cold the world gets, you have a warm place here."
+        };
+
+        function switchSeason(seasonKey) {
+            // Clear active styling from all buttons
+            document.querySelectorAll('.season-btn').forEach(btn => {
+                btn.classList.remove('border-pink-500/35', 'bg-pink-500/15', 'text-pink-200');
+                btn.classList.add('border-pink-500/10', 'bg-transparent', 'text-pink-300/60');
+            });
+            
+            // Set active button
+            const activeBtn = document.getElementById(`btn-${seasonKey}`);
+            activeBtn.classList.remove('border-pink-500/10', 'bg-transparent', 'text-pink-300/60');
+            activeBtn.classList.add('border-pink-500/35', 'bg-pink-500/15', 'text-pink-200');
+            
+            // Animate transition on details text
+            const descEl = document.getElementById('season-desc');
+            descEl.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                descEl.innerText = seasonData[seasonKey];
+                descEl.classList.remove('opacity-0', 'scale-95');
+            }, 250);
+        }
+
+        // --- 9. CLICK TO CELEBRATE HEART STREAM ---
+        function celebrateEffect() {
+            const btn = document.getElementById('celebrate-btn');
+            const rect = btn.getBoundingClientRect();
+            const originX = rect.left + rect.width / 2;
+            const originY = rect.top;
+            
+            const emojis = ["❤️", "💖", "✨", "💕", "🎂", "🥳", "🎈", "🌸", "🌷"];
+            const showerCount = 50;
+            
+            for (let i = 0; i < showerCount; i++) {
+                const el = document.createElement('div');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.position = 'fixed';
+                el.style.left = originX + 'px';
+                el.style.top = originY + 'px';
+                el.style.fontSize = Math.random() * 20 + 15 + 'px';
+                el.style.pointerEvents = 'none';
+                el.style.zIndex = '999';
+                
+                // Shoot upwards with spread (angle range: 200 - 340 deg)
+                const angle = (Math.PI + 0.5) + (Math.random() * 1.2 - 0.6);
+                const velocity = Math.random() * 400 + 200;
+                const duration = Math.random() * 1200 + 1000;
+                
+                el.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
+                el.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
+                el.style.setProperty('--rot', Math.random() * 360 + 'deg');
+                el.style.animation = `burst ${duration}ms ease-out forwards`;
+                
+                document.body.appendChild(el);
+                
+                // Remove elements after animating
+                setTimeout(() => el.remove(), duration);
+            }
+        }
+
+        // --- 10. SECRET CRT RETRO MODAL LOGIC ---
+        const secretModal = document.getElementById('secret-modal');
+        
+        function openSecretModal() {
+            secretModal.classList.remove('hidden');
+            document.body.style.overflow = "hidden"; // Lock screen scrolling
+            setTimeout(() => {
+                secretModal.classList.remove('opacity-0');
+                secretModal.classList.add('opacity-100');
+            }, 50);
+        }
+        
+        function closeSecretModal() {
+            secretModal.classList.remove('opacity-100');
+            secretModal.classList.add('opacity-0');
+            setTimeout(() => {
+                secretModal.classList.add('hidden');
+                document.body.style.overflowY = "auto"; // Restore scrolling
+            }, 300);
+        }
+
+        // --- 11. GENERAL FLOATING EMBELLISHMENTS ---
+        const floatingItems = ["❤️", "💖", "✨", "🌸", "💕", "🌷"];
+        
+        function spawnFloatingItem() {
+            // Only spawn if main screen is interactive
+            if (mainContent.classList.contains('pointer-events-none')) return;
+            
+            const el = document.createElement("div");
+            el.innerHTML = floatingItems[Math.floor(Math.random() * floatingItems.length)];
+            el.style.position = "fixed";
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.top = "-30px";
+            el.style.fontSize = Math.random() * 15 + 15 + "px";
+            el.style.zIndex = "30";
+            el.style.pointerEvents = "none";
+            el.style.opacity = Math.random() * 0.5 + 0.3;
+            el.style.animation = `fall ${Math.random() * 4 + 4}s linear`;
+            
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 8000);
+        }
+        
+        // Spawn falling flowers/hearts constantly
+        setInterval(spawnFloatingItem, 600);
+    </script>
 
 </body>
 </html>
